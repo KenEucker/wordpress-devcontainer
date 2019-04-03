@@ -20,13 +20,13 @@ Run `npm install` to install the required node packages.
 
 # Development 
 ## Compiling
-After making changes to the theme or plugin source files, some items may need compiled. Compilation occurs within the source folder, and will change the source files, not the files running in wordpress. Compilation come before building, where those source files are copied to the build folder. 
+After making changes to the theme or plugin source files, some items may need compiled. Compilation occurs within the source folder, and will change the source files, not the files running in wordpress. Compilation come before building, where those source files are copied to the dist folder. 
 
 ## Building
-The build process copies the source files into the build folder where they will fall into the wordpress wp-content folder structure and be named according to the configuration found in the package.json. The build files should be only what needs to go to wordpress, and nothing more. Files from the source folder can be excluded by using the configuration found in the package.json.
+The build process copies the source files into the dist folder where they will fall into the wordpress wp-content folder structure and be named according to the configuration found in the package.json. The build files should be only what needs to go to wordpress, and nothing more. Files from the source folder can be excluded by using the configuration found in the package.json.
 
 ## Deploying
-The deploy process copies the contents of the build folder into wordpress. After deploying, you will see your changes reflected in the dist folder and on wordpress. Be careful making any modifications in the build or dist folders, as these changes will not make it into the source of the project.
+The deploy process copies the contents of the dist folder into wordpress. After deploying, you will see your changes reflected in the dist folder and on wordpress. Be careful making any modifications in the dist or wp-content folders, as these changes will not make it into the source of the project.
 
 ## Running wordpress
 To run wordpress on your local machine, run `npm run start` to bring the docker container up. Soon, http://localhost:8080, will be available. If this is the first time you've run wordpress, you'll need to set up the wordpress site and create the first user credentials.
@@ -46,7 +46,7 @@ To stop the docker environment and completely delete it, as well as the dist fol
 If you've made changes to the source files, you can run `npm run redeploy` and every process to push the changes to wordpress will run.
 
 # Philosophy
-This is a testbed or development environment intended to run a theme or plugin in complete isolation on a vanilla wordpress install. You'll notice that the source folder contains 'theme' not theme(s) as well as 'plugin' not plugin(s), this is to enforce the isolation of this environment down to a singlular concerns. Any external dependencies needed can still be installed to wordpress as needed, but these settings may be lost if the docker environment is deleted (`teardown`).
+This is a testbed or development environment intended to run a theme or plugin in complete isolation on a vanilla wordpress install. You'll notice that the source folder contains 'theme' not theme(s) as well as 'plugin' not plugin(s), this is to enforce the isolation of this environment down to singlular concerns. Any external dependencies needed can still be installed to wordpress as needed, but changes may be lost if the docker environment is deleted (`teardown`).
 
 # Vendors that make this project possible
 [Understrap](https://understrap.com/)
