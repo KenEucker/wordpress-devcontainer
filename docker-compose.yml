@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: db_user
+      WORDPRESS_DB_PASSWORD: db_pass
+      WORDPRESS_DB_NAME: wp
+    volumes:
+      - ./wp-content:/var/www/html/wp-content/
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_pass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'

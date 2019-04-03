@@ -1,0 +1,15 @@
+#!/bin/bash
+wp_folder="wp-content"
+dist_folder="dist"
+
+if [ ! -d "$dist_folder" ]; then
+	npm run build
+fi
+
+if [ ! -d "$wp_folder" ]; then
+	mkdir $wp_folder/themes/ -p
+	mkdir $wp_folder/plugins/ -p
+fi
+
+sudo chmod -R 777 $wp_folder
+cp $dist_folder/* $wp_folder/ -Rf

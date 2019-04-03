@@ -1,0 +1,7 @@
+#!/bin/bash
+wp_folder="wp-content"
+dist_folder="dist"
+
+docker-compose down --rm all
+rm -rf $dist_folder
+sudo rm -rf $wp_folder

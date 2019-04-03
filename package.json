@@ -1,0 +1,26 @@
+{
+	"name": "wordpress-devcontainer",
+	"description": "A simple docker developer environment for wordpress theme and plugin development",
+	"version": "0.0.1",
+	"author": "Ken Eucker <keneucker@gmail.com>",
+	"contributors": [],
+	"bin": {},
+	"scripts": {
+		"build": "./bin/build",
+		"compile": "./bin/compile",
+		"deploy": "./bin/deploy",
+		"redeploy": "npm run build && npm run compile && npm run deploy",
+		"start": "./bin/start",
+		"stop": "./bin/stop",
+		"teardown": "./bin/teardown"
+	},
+	"devDependencies": {
+		"fs": "0.0.1-security",
+		"mkdirp": "^0.5.1",
+		"ncp": "^2.0.0"
+	},
+	"config": {
+		"theme_name": "Diversity",
+		"plugin_name": ""
+	}
+}

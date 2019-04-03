@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd src/theme
+./node_modules/.bin/gulp -f src/theme/gulpfile.js styles
+./node_modules/.bin/gulp -f src/theme/gulpfile.js scripts
