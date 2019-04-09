@@ -43,7 +43,7 @@ for (let index in sourceFolders) {
 				if (files.length) {
 
 					// Aptly name the theme or plugin
-					if (sourceName == 'theme') {
+					if (sourceName == 'theme' || sourceName == 'theme/dist') {
 						buildFolder = path.join(buildFolder, themeName);
 					} else if (sourceName == 'plugin') {
 						buildFolder = path.join(buildFolder, pluginName);
