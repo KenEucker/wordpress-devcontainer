@@ -8,7 +8,7 @@ const fs = require('fs-extra'),
 	buildParent = 'dist',
 	sourceParent = 'src';
 
-let sourceFolders = ['theme', 'plugin'],
+let sourceFolders = ['theme/dist', 'plugin'],
 	buildFolders = ['themes', 'plugins'];
 
 if (siteIsVIP) {

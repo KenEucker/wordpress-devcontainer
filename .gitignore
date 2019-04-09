@@ -60,6 +60,12 @@ typings/
 # next.js build output
 .next
 
+# output folders
 build/
 dist/
+
+# docker volume
 .wp/
+
+# src subfolders
+# src/**/

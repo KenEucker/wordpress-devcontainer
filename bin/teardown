@@ -1,8 +1,5 @@
 #!/bin/bash
-wp_folder="./.wp"
-dist_folder="dist"
 
 docker-compose down --rm all --remove-orphans
-sudo rm -rf $dist_folder
-sudo rm -rf $wp_folder
-sudo rm -rf wp
+
+npm run clean

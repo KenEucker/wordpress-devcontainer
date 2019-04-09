@@ -8,5 +8,6 @@ if [ ! -d "$node_modules_folder" ]; then
 	npm install
 fi
 
-./node_modules/.bin/gulp -f src/theme/gulpfile.js styles
-./node_modules/.bin/gulp -f src/theme/gulpfile.js scripts
+cd ../..
+
+./node_modules/.bin/gulp -f src/theme/gulpfile.js compile

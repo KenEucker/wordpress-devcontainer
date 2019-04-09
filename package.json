@@ -7,16 +7,20 @@
 	"bin": {},
 	"scripts": {
 		"build": "./bin/build",
+		"clean": "./bin/clean",
 		"compile": "./bin/compile",
 		"deploy": "./bin/deploy",
-		"redeploy": "npm run build && npm run compile && npm run deploy",
+		"pull": "./bin/pull",
+		"redeploy": "npm run compile && npm run build && npm run deploy",
 		"start": "./bin/start",
 		"stop": "./bin/stop",
 		"teardown": "./bin/teardown",
 		"vip": "./bin/vip"
 	},
 	"devDependencies": {
+		"download-git-repo": "^1.1.0",
 		"fs-extra": "^7.0.1",
+		"gulp": "^4.0.0",
 		"mkdirp": "^0.5.1",
 		"path": "^0.12.7",
 		"replace-in-file": "^3.4.4"
@@ -24,6 +28,13 @@
 	"config": {
 		"vip": true,
 		"theme_name": "my-theme",
-		"plugin_name": ""
+		"theme_repo": "keneucker/understrap-child",
+		"plugin_name": null,
+		"plugin_repo": null,
+		"cloneRepo": true,
+		"repo": null
+	},
+	"dependencies": {
+		"commander": "^2.20.0"
 	}
 }
