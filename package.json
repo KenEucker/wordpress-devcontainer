@@ -12,15 +12,18 @@
 		"redeploy": "npm run build && npm run compile && npm run deploy",
 		"start": "./bin/start",
 		"stop": "./bin/stop",
-		"teardown": "./bin/teardown"
+		"teardown": "./bin/teardown",
+		"vip": "./bin/vip"
 	},
 	"devDependencies": {
-		"fs": "0.0.1-security",
+		"fs-extra": "^7.0.1",
 		"mkdirp": "^0.5.1",
-		"ncp": "^2.0.0"
+		"path": "^0.12.7",
+		"replace-in-file": "^3.4.4"
 	},
 	"config": {
-		"theme_name": "Diversity",
+		"vip": true,
+		"theme_name": "my-theme",
 		"plugin_name": ""
 	}
 }

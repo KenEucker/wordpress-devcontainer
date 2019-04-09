@@ -1,0 +1,10 @@
+#!/bin/bash
+
+node_modules_folder="node_modules"
+
+if [ ! -d "$node_modules_folder" ]; then
+	echo "node modules are missing"
+	exit 1
+fi
+
+sudo node vip.js

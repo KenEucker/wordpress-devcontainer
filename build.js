@@ -1,57 +1,71 @@
-const ncp = require('ncp').ncp,
-	fs = require('fs'),
+const fs = require('fs-extra'),
+	path = require('path'),
 	config = require('./package.json').config,
 	mkdirp = require('mkdirp'),
 	themeName = config.theme_name,
 	pluginName = config.plugin_name || config.theme_name,
-	buildFolder = 'dist',
-	sourceFolder = 'src',
-	themeSourceFolder = `${sourceFolder}/theme/`,
-	pluginSourceFolder = `${sourceFolder}/plugin/`,
-	themeOutputFolder = `${buildFolder}/themes/${themeName}`,
-	pluginOutputFolder = `${buildFolder}/plugins/${pluginName}`;
+	siteIsVIP = config.vip,
+	buildParent = 'dist',
+	sourceParent = 'src';
 
-fs.readdir(pluginSourceFolder, function (err, files) {
+let sourceFolders = ['theme', 'plugin'],
+	buildFolders = ['themes', 'plugins'];
 
-	if (err) console.error(err)
-	else {
-		if (files.length) {
+if (siteIsVIP) {
+	vipFolders = [
+		'client-mu-plugins',
+		'images',
+		'languages',
+		'private',
+		'vip-config',
+	];
 
-			mkdirp(pluginOutputFolder, function (err) {
+	sourceFolders = sourceFolders.concat(vipFolders);
+	buildFolders = buildFolders.concat(vipFolders);
+}
 
-				if (err) console.error(err);
-				else {
+console.log('deleting build folder', buildParent);
+fs.removeSync(buildParent);
 
-					ncp(`${sourceFolder}/plugin`, pluginOutputFolder, function (err) {
+for (let index in sourceFolders) {
 
-						if (err) return console.error(err);
+	let sourceName = sourceFolders[index],
+		buildName = buildFolders[index],
+		sourceFolder = path.join(sourceParent, sourceName),
+		buildFolder = path.join(buildParent, buildName);
+
+	if (fs.existsSync(sourceFolder)) {
+
+		fs.readdir(sourceFolder, function (err, files) {
+
+			if (err) console.error(err)
+			else {
+				if (files.length) {
+
+					// Aptly name the theme or plugin
+					if (sourceName == 'theme') {
+						buildFolder = path.join(buildFolder, themeName);
+					} else if (sourceName == 'plugin') {
+						buildFolder = path.join(buildFolder, pluginName);
+					}
+
+					mkdirp(buildFolder, function (err) {
+
+						if (err) console.error(err);
 						else {
-							console.log(`Plugin {${pluginName}} copied to the build folder`, pluginOutputFolder);
+
+							fs.copy(sourceFolder, buildFolder, function (err) {
+
+								if (err) return console.error(err);
+								else {
+									console.log(`${sourceName} copied to the build folder`, buildFolder);
+								}
+							});
 						}
 					});
 				}
-			});
-		}
+			}
+
+		});
 	}
-});
-
-fs.readdir(themeSourceFolder, function (err, files) {
-
-	if (err) console.error(err)
-	else {
-		if (files.length) {
-
-			mkdirp(themeOutputFolder, function (err) {
-				if (err) console.error(err);
-
-				ncp(`${sourceFolder}/theme`, themeOutputFolder, function (err) {
-
-					if (err) return console.error(err);
-					else {
-						console.log(`Theme ${themeName} copied to the build folder`, themeOutputFolder);
-					}
-				});
-			});
-		}
-	}
-});
+}

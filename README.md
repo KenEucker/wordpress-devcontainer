@@ -8,7 +8,7 @@ As a quikstart, I've included the understrap child theme (https://understrap.com
 Run `npm install` to install the required node packages.
 
 ## Run and deploy local wordpress
-`npm run start` - creates the docker environment, if it does not exist, and runs wordpress at http://localhost:8080. Run `npm run deploy` to copy all of the plugin and theme files to the wordpress installation. The theme and plugin will need to be activated from the wordpress admin after the first deploy. After making changes to the source files, run `npm run redeploy` to have wordpress reflect those changes.
+`npm run start` - creates the docker environment, if it does not exist, and runs wordpress at http://localhost:4000. Run `npm run deploy` to copy all of the plugin and theme files to the wordpress installation. The theme and plugin will need to be activated from the wordpress admin after the first deploy. After making changes to the source files, run `npm run redeploy` to have wordpress reflect those changes.
 
 # Requirements
 ## These items are assumed to be installed
@@ -29,7 +29,7 @@ The build process copies the source files into the dist folder where they will f
 The deploy process copies the contents of the dist folder into wordpress. After deploying, you will see your changes reflected in the dist folder and on wordpress. Be careful making any modifications in the dist or wp-content folders, as these changes will not make it into the source of the project.
 
 ## Running wordpress
-To run wordpress on your local machine, run `npm run start` to bring the docker container up. Soon, http://localhost:8080, will be available. If this is the first time you've run wordpress, you'll need to set up the wordpress site and create the first user credentials.
+To run wordpress on your local machine, run `npm run start` to bring the docker container up. Soon, http://localhost:4000, will be available. If this is the first time you've run wordpress, you'll need to set up the wordpress site and create the first user credentials.
 
 ## Using the theme and plugin with wordpress
 On a fresh version of wordpress, you'll need to enable the theme and plugin in the wordpress admin. When using the child theme for understrap, you'll find that there's an error where the parent theme is missing from wordpress. You can click to install it from the theme settings menu in the wordpress admin.
