@@ -1,19 +1,41 @@
 #!/bin/bash
 
-soureFolder='src'
+sourceFolder='src'
+themeFolder="$sourceFolder/theme"
+pluginFolder="$sourceFolder/plugin"
+node_modules_folder="node_modules"
 
-if [ "$(ls -A $soureFolder)" ]; then
+if [ "$(ls -A $sourceFolder)" ]; then
 	node pull.js
 fi
 
-cd src/theme
 
-node_modules_folder="node_modules"
+if [ "$(ls -A $themeFolder)" ]; then
 
-if [ ! -d "$node_modules_folder" ]; then
-	npm install
+	cd $themeFolder
+
+	if [ ! -d "$node_modules_folder" ]; then
+		npm install
+	fi
+
+	cd ../..
+
+	if [ ! -d "$themeFolder/gulpfile.js" ]; then
+		./node_modules/.bin/gulp -f $themeFolder/gulpfile.js compile
+	fi
 fi
 
-cd ../..
+if [ "$(ls -A $pluginFolder)" ]; then
 
-./node_modules/.bin/gulp -f src/theme/gulpfile.js compile
+	cd $pluginFolder
+
+	if [ ! -d "$node_modules_folder" ]; then
+		npm install
+	fi
+
+	cd ../..
+
+	if [ ! -d "$pluginFolder/gulpfile.js" ]; then
+		./node_modules/.bin/gulp -f $pluginFolder/gulpfile.js compile
+	fi
+fi

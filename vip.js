@@ -3,7 +3,9 @@ const fs = require('fs-extra'),
 	replace = require('replace-in-file'),
 	mkdirp = require('mkdirp'),
 	config = require('./package.json').config,
-	siteIsVIP = config.vip;
+	siteIsVIP = config.vip,
+	pull = require('./pull.js'),
+	sourceFolder = 'src';
 
 if (siteIsVIP) {
 	const wordpressFolder = '.wp',
@@ -14,6 +16,8 @@ if (siteIsVIP) {
 			'private',
 			'vip-config',
 		];
+
+	const wordpressVIPMuPlugins = `Automattic/vip-go-mu-plugins`;
 
 	const createFolderInWordpressFolder = (folderPath, done) => {
 		if (!done) {
@@ -31,6 +35,8 @@ if (siteIsVIP) {
 		for (const folderPath of vipFolders) {
 			createFolderInWordpressFolder(folderPath);
 		}
+
+		pull(wordpressVIPMuPlugins, `${sourceFolder}/mu-plugins`);
 
 		// Add the vip-config to the wp-config
 		const editAfterString = `/* That's all, stop editing! Happy publishing. */`;

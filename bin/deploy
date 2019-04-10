@@ -1,13 +1,14 @@
 #!/bin/bash
+
 wp_folder="./.wp/wp-content"
 dist_folder="dist"
 
-if [ ! -d "$dist_folder" ]; then
-	npm run build
-fi
+sudo chmod -R 777 $wp_folder
 
 mkdir $wp_folder/themes/ -p
 mkdir $wp_folder/plugins/ -p
 
-sudo chmod -R 777 $wp_folder
-cp $dist_folder/* $wp_folder/ -Rf
+if [ "$(ls -A $dist_folder)" ]; then
+	npm run build
+	cp $dist_folder/* $wp_folder/ -Rf
+fi

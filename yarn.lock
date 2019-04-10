@@ -1819,6 +1819,11 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mkdirp-sync@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/mkdirp-sync/-/mkdirp-sync-0.0.3.tgz#2a7cf5b04f3ad7cba5f41f79a754939fc30d7e16"
+  integrity sha512-p3raJmGXoDqceIMqxAgx/DHesLkC+Ni+qTUpVIXuTuvvVcIihAbcTT68w68HHMqW5yEreNB1dl2EBm4TKtnLoQ==
+
 mkdirp@^0.5.0, mkdirp@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"

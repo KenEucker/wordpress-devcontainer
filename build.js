@@ -8,8 +8,8 @@ const fs = require('fs-extra'),
 	buildParent = 'dist',
 	sourceParent = 'src';
 
-let sourceFolders = ['theme/dist', 'plugin'],
-	buildFolders = ['themes', 'plugins'];
+let sourceFolders = ['theme/dist', 'themes', 'plugin', 'plugins'],
+	buildFolders = ['themes', 'themes', 'plugins', 'plugins'];
 
 if (siteIsVIP) {
 	vipFolders = [
@@ -24,8 +24,10 @@ if (siteIsVIP) {
 	buildFolders = buildFolders.concat(vipFolders);
 }
 
-console.log('deleting build folder', buildParent);
-fs.removeSync(buildParent);
+if (fs.existsSync(buildParent)) {
+	console.log('deleting build folder', buildParent);
+	fs.removeSync(buildParent);
+}
 
 for (let index in sourceFolders) {
 
@@ -35,7 +37,6 @@ for (let index in sourceFolders) {
 		buildFolder = path.join(buildParent, buildName);
 
 	if (fs.existsSync(sourceFolder)) {
-
 		fs.readdir(sourceFolder, function (err, files) {
 
 			if (err) console.error(err)
@@ -53,7 +54,6 @@ for (let index in sourceFolders) {
 
 						if (err) console.error(err);
 						else {
-
 							fs.copy(sourceFolder, buildFolder, function (err) {
 
 								if (err) return console.error(err);

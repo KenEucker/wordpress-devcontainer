@@ -1,7 +1,7 @@
 {
 	"name": "wordpress-devcontainer",
 	"description": "A simple docker developer environment for wordpress theme and plugin development",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"author": "Ken Eucker <keneucker@gmail.com>",
 	"contributors": [],
 	"bin": {},
@@ -27,14 +27,19 @@
 	},
 	"config": {
 		"vip": true,
+		"name": "",
 		"theme_name": "my-theme",
-		"theme_repo": "keneucker/understrap-child",
 		"plugin_name": null,
-		"plugin_repo": null,
-		"cloneRepo": true,
-		"repo": null
+		"repositories": {
+			"src": null,
+			"theme": null,
+			"plugin": null,
+			"access_token": null,
+			"clone": false
+		}
 	},
 	"dependencies": {
-		"commander": "^2.20.0"
+		"commander": "^2.20.0",
+		"mkdirp-sync": "^0.0.3"
 	}
 }
