@@ -1,5 +1,4 @@
 #!/bin/bash
-
 sourceFolder='src'
 themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"

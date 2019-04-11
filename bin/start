@@ -1,6 +1,7 @@
 #!/bin/bash
+wp_folder='.wp'
 
-mkdir -p .wp
+mkdir -p $wp_folder
 
 docker-compose up -d
 

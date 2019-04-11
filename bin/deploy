@@ -1,5 +1,4 @@
 #!/bin/bash
-
 wp_folder="./.wp/wp-content"
 dist_folder="dist"
 

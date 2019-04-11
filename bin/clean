@@ -4,4 +4,3 @@ dist_folder="dist"
 
 sudo rm -rf $dist_folder
 sudo rm -rf $wp_folder
-sudo rm -rf wp

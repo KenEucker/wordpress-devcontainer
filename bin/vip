@@ -1,5 +1,4 @@
 #!/bin/bash
-
 node_modules_folder="node_modules"
 
 if [ ! -d "$node_modules_folder" ]; then
