@@ -66,6 +66,6 @@ typings/
 # thrashed folders
 ## output folders
 build/
-dist/**/
+dist/**/*
 ## source folder
-src/**/
+src/**/*

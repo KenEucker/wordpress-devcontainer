@@ -7,6 +7,7 @@ const download = require('download-git-repo'),
 	sourceFolder = 'src';
 
 commander.version(pkg.version)
+	.option('-o, --overwrite [overwrite]', 'overwrite the source folder contents', false)
 	.option('-r, --repo [repo]', 'name of the repository to pull', config.src)
 	.option('-d, --dest [dest]', 'the destination folder', sourceFolder)
 	.option('-a, --auth [auth]', 'the authorization token', config.access_token)
@@ -16,10 +17,14 @@ commander.version(pkg.version)
 const repo = commander.repo,
 	dest = commander.dest,
 	clone = !!commander.clone,
+	overwrite = !!commander.overwrite,
 	authorization = commander.auth ? `Authorization: token ${commander.auth}` : null;
 
 const downloadRepo = function (repo, dest, overwrite) {
-	const opts = { clone, authorization };
+	const opts = {
+		clone,
+		authorization
+	};
 	const done = function (err) {
 		if (err) {
 			console.error(err);
@@ -36,13 +41,14 @@ const downloadRepo = function (repo, dest, overwrite) {
 		if (err) console.error(err)
 		else {
 			if (!files.length || overwrite) {
+				fs.removeSync(dest);
 				download(repo, dest, opts, done);
 			}
 		}
 	});
 };
 
-if (repo && repo.length && dest.length) {
+if ((repo && repo.length && dest.length) || overwrite) {
 	if (!fs.existsSync(sourceFolder)) {
 		mkdirp(sourceFolder);
 	}
@@ -58,9 +64,10 @@ if (repo && repo.length && dest.length) {
 		const ignoreKeys = ['src', 'clone', 'access_token'];
 		Object.keys(config).forEach(function (key) {
 			const val = config[key];
+
 			if (val && ignoreKeys.indexOf(key) == -1) {
-				const dest = `${sourceFolder}/${val}`;
-				downloadRepo(key, dest, true);
+				const dest = `${sourceFolder}/${key}`;
+				downloadRepo(val, dest, true);
 			}
 		});
 	});

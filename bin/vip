@@ -6,4 +6,4 @@ if [ ! -d "$node_modules_folder" ]; then
 	exit 1
 fi
 
-sudo node vip.js
+sudo node vip.js "$@"

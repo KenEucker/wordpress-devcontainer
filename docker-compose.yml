@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 services:
   mysql:
@@ -9,11 +9,15 @@ services:
       MYSQL_USER: db_user
       MYSQL_PASSWORD: db_pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    networks:
+      - "wpn"
   wordpress:
     image: wordpress:latest
     restart: always
+    expose:
+      - "5000"
     ports:
-      - 4000:80
+      - 5000:80
     links:
       - mysql
     environment:
@@ -23,4 +27,25 @@ services:
       WORDPRESS_DB_NAME: wp
       WORDPRESS_CONFIG_EXTRA: ''
     volumes:
-      - ./.wp:/var/www/html
+      - ".wp:/var/www/html"
+    networks:
+      - "wpn"
+  phpcs:
+    image: herloct/phpcs
+    volumes:
+      - ./dist:/var/www/html/
+    networks:
+      - "wpn"
+  wp-cli:
+    image: wordpress:cli
+    volumes:
+      - ".wp:/var/www/html:rw"
+    networks:
+      - "wpn"
+
+volumes:
+  .wp:
+    driver: local
+
+networks:
+  wpn: {}

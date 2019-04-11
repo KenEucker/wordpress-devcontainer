@@ -32,7 +32,7 @@
 		"plugin_name": null,
 		"repositories": {
 			"src": null,
-			"theme": null,
+			"theme": "KenEucker/understrap-child",
 			"plugin": null,
 			"access_token": null,
 			"clone": false

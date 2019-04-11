@@ -4,8 +4,9 @@ themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"
 node_modules_folder="node_modules"
 
-if [ "$(ls -A $sourceFolder)" ]; then
-	node pull.js
+if [ !"$(ls -A $sourceFolder)" ]; then
+	echo "pulling in sourcefiles"
+	node pull.js "$@"
 fi
 
 
