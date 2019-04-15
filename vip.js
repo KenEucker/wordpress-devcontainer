@@ -5,10 +5,10 @@ const fs = require('fs-extra'),
 	config = require('./package.json').config,
 	siteIsVIP = config.vip,
 	pull = require('./pull.js'),
-	sourceFolder = 'src';
+	sourceFolder = path.resolve('src');
 
 if (siteIsVIP) {
-	const wordpressFolder = '.wp',
+	const wordpressFolder = path.resolve('.wp'),
 		vipFolders = [
 			'client-mu-plugins',
 			'images',
@@ -19,7 +19,7 @@ if (siteIsVIP) {
 
 	const wordpressVIPMuPlugins = `Automattic/vip-go-mu-plugins`;
 
-	const createFolderInWordpressFolder = (folderPath, done) => {
+	const createFolderInWordpressContentFolder = (folderPath, done) => {
 		if (!done) {
 
 			done = (err) => {
@@ -27,13 +27,13 @@ if (siteIsVIP) {
 			};
 		}
 
-		mkdirp(path.join(wordpressFolder, folderPath), done);
+		mkdirp(path.join(wordpressFolder, 'wp-content', folderPath), done);
 	}
 
-	if (!fs.existsSync(`${__dirname}${wordpressFolder}`)) {
+	if (fs.existsSync(wordpressFolder)) {
 
 		for (const folderPath of vipFolders) {
-			createFolderInWordpressFolder(folderPath);
+			createFolderInWordpressContentFolder(folderPath);
 		}
 
 		pull(wordpressVIPMuPlugins, `${sourceFolder}/mu-plugins`);

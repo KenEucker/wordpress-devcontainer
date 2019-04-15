@@ -1,18 +1,28 @@
 const fs = require('fs-extra'),
 	path = require('path'),
-	config = require('./package.json').config,
+	pkg = require('./package.json'),
+	config = pkg.config,
 	mkdirp = require('mkdirp'),
+	mkdirpSync = require('mkdirp-sync'),
+	commander = require('commander'),
 	themeName = config.theme_name,
 	pluginName = config.plugin_name || config.theme_name,
 	siteIsVIP = config.vip,
-	buildParent = 'dist',
-	sourceParent = 'src';
+	buildParent = path.resolve(`${__dirname}/dist`),
+	sourceParent = path.resolve(`${__dirname}/src`);
 
-let sourceFolders = ['theme/dist', 'themes', 'plugin', 'plugins'],
-	buildFolders = ['themes', 'themes', 'plugins', 'plugins'];
+
+	commander.version(pkg.version)
+	.option('-k, --keep [keep]', 'does clean the build folder if it already exists', false)
+	.parse(process.argv);
+
+const keep = !!commander.keep;
+
+let sourceFolders = ['theme/dist', 'themes', 'plugin', 'plugins', 'mu-plugins'],
+	buildFolders = ['themes', 'themes', 'plugins', 'plugins', 'mu-plugins'];
 
 if (siteIsVIP) {
-	vipFolders = [
+	const vipFolders = [
 		'client-mu-plugins',
 		'images',
 		'languages',
@@ -23,10 +33,10 @@ if (siteIsVIP) {
 	sourceFolders = sourceFolders.concat(vipFolders);
 	buildFolders = buildFolders.concat(vipFolders);
 }
-
-if (fs.existsSync(buildParent)) {
-	console.log('deleting build folder', buildParent);
+if (fs.existsSync(buildParent) && !keep) {
+	console.log('cleaning build folder', buildParent);
 	fs.removeSync(buildParent);
+	mkdirpSync(buildParent);
 }
 
 for (let index in sourceFolders) {

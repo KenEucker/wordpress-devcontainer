@@ -2,10 +2,11 @@
 sourceFolder='src'
 themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"
-node_modules_folder="node_modules"
+nodeModulesFolder="node_modules"
+
+sudo chmod -R 777 $sourceFolder
 
 if [ !"$(ls -A $sourceFolder)" ]; then
-	echo "pulling in sourcefiles"
 	node pull.js "$@"
 fi
 
@@ -14,7 +15,7 @@ if [ "$(ls -A $themeFolder)" ]; then
 
 	cd $themeFolder
 
-	if [ ! -d "$node_modules_folder" ]; then
+	if [ ! -d "$nodeModulesFolder" ]; then
 		npm install
 	fi
 
@@ -29,7 +30,7 @@ if [ "$(ls -A $pluginFolder)" ]; then
 
 	cd $pluginFolder
 
-	if [ ! -d "$node_modules_folder" ]; then
+	if [ ! -d "$nodeModulesFolder" ]; then
 		npm install
 	fi
 

@@ -1,8 +1,6 @@
 #!/bin/bash
-wp_folder='.wp'
+wpFolder='.wp'
 
-mkdir -p $wp_folder
+mkdir -p $wpFolder
 
 docker-compose up -d
-
-xdg-open http://localhost:4000

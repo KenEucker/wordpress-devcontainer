@@ -1,6 +1,6 @@
 #!/bin/bash
-wp_folder="./.wp"
-dist_folder="dist"
+wpFolder="./.wp"
+distFolder="dist"
 
-sudo rm -rf $dist_folder
-sudo rm -rf $wp_folder
+sudo rm -rf $distFolder
+sudo rm -rf $wpFolder

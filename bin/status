@@ -1,0 +1,14 @@
+#!/bin/bash
+wpPort=5000
+
+set -eu pipefail
+
+echo "Attempting to connect to wordpress web container on port[$wpPort]"
+until $(nc -zv botms http://localhost:$wpPort); do
+    printf '.'
+    sleep 5
+done
+
+echo "All services have been connected"
+
+exit 0

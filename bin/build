@@ -1,12 +1,12 @@
 #!/bin/bash
-node_modules_folder="node_modules"
+nodeModulesFolder="node_modules"
 soureFolder='src'
 
 if [ "$(ls -A $soureFolder)" ]; then
 	node pull.js "$@"
 fi
 
-if [ ! -d "$node_modules_folder" ]; then
+if [ ! -d "$nodeModulesFolder" ]; then
 	echo "node modules are missing"
 	exit 1
 fi

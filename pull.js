@@ -36,7 +36,6 @@ const downloadRepo = function (repo, dest, overwrite) {
 	if (!fs.existsSync(dest)) {
 		mkdirp(dest);
 	}
-
 	fs.readdir(dest, function (err, files) {
 		if (err) console.error(err)
 		else {
@@ -56,20 +55,24 @@ if ((repo && repo.length && dest.length) || overwrite) {
 	fs.readdir(sourceFolder, function (err, files) {
 		if (err) console.error(err)
 		else {
-			if (!files.length) {
-				downloadRepo(repo, dest);
+
+			if ((!files.length && !!repo) || (overwrite && !!repo)){
+				console.log(`loading src from repository ${repo} into folder ${sourceFolder}`);
+				downloadRepo(repo, sourceFolder, overwrite);
 			}
+
+			const ignoreKeys = ['src', 'clone', 'access_token'];
+			Object.keys(config).forEach( function (key) {
+				const val = config[key];
+
+				if (val && ignoreKeys.indexOf(key) == -1) {
+					const dest = `${sourceFolder}/${key}`;
+					console.log(`loading repository ${val} into folder ${dest}`);
+
+					downloadRepo(val, dest, true);
+				}
+			});
 		}
-
-		const ignoreKeys = ['src', 'clone', 'access_token'];
-		Object.keys(config).forEach(function (key) {
-			const val = config[key];
-
-			if (val && ignoreKeys.indexOf(key) == -1) {
-				const dest = `${sourceFolder}/${key}`;
-				downloadRepo(val, dest, true);
-			}
-		});
 	});
 }
 
