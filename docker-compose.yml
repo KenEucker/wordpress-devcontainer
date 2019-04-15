@@ -15,9 +15,9 @@ services:
     image: wordpress:latest
     restart: always
     expose:
-      - "5000"
+      - "3000"
     ports:
-      - 5000:80
+      - 3000:80
     links:
       - mysql
     environment:
@@ -38,6 +38,16 @@ services:
       - "wpn"
   wp-cli:
     image: wordpress:cli
+    links:
+      - mysql
+      - wordpress
+    # user: xfs
+    depends_on:
+      - wordpress
+    command: >
+        /bin/sh -c '
+        sleep 30;
+        wp core install --path="/var/www/html" --url="http://localhost:3000" --title="Local Wordpress" --admin_user=admin --admin_password=admin --admin_email=a@d.min && echo "WP Core Complete"'
     volumes:
       - ".wp:/var/www/html:rw"
     networks:
