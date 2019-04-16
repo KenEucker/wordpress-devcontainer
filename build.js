@@ -1,18 +1,19 @@
 const fs = require('fs-extra'),
 	path = require('path'),
-	pkg = require('./package.json'),
-	config = pkg.config,
+	chalk = require('chalk'),
 	mkdirp = require('mkdirp'),
 	mkdirpSync = require('mkdirp-sync'),
 	commander = require('commander'),
+	pkg = require('./package.json'),
+
+	config = pkg.config,
 	themeName = config.theme_name,
 	pluginName = config.plugin_name || config.theme_name,
 	siteIsVIP = config.vip,
 	buildParent = path.resolve(`${__dirname}/dist`),
 	sourceParent = path.resolve(`${__dirname}/src`);
 
-
-	commander.version(pkg.version)
+commander.version(pkg.version)
 	.option('-k, --keep [keep]', 'does clean the build folder if it already exists', false)
 	.parse(process.argv);
 
@@ -34,7 +35,7 @@ if (siteIsVIP) {
 	buildFolders = buildFolders.concat(vipFolders);
 }
 if (fs.existsSync(buildParent) && !keep) {
-	console.log('cleaning build folder', buildParent);
+	console.log(chalk.yellow('cleaning build folder'), buildParent);
 	fs.removeSync(buildParent);
 	mkdirpSync(buildParent);
 }
@@ -68,7 +69,7 @@ for (const index in sourceFolders) {
 
 								if (err) return console.error(err);
 								else {
-									console.log(`${sourceName} copied to the build folder`, buildFolder);
+									console.log(chalk.green(`${sourceName} copied to the build folder`), buildFolder);
 								}
 							});
 						}

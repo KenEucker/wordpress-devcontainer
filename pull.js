@@ -1,10 +1,12 @@
 const download = require('download-git-repo'),
 	commander = require('commander'),
-	pkg = require('./package.json'),
 	path = require('path'),
-	config = pkg.config.repositories || {},
+	chalk = require('chalk'),
 	fs = require('fs-extra'),
 	mkdirp = require('mkdirp-sync'),
+
+	pkg = require('./package.json'),
+	config = pkg.config.repositories || {},
 	sourceFolder = path.resolve('src');
 
 commander.version(pkg.version)
@@ -33,7 +35,7 @@ const downloadRepo = function (repo, dest, overwrite) {
 		if (err) {
 			console.error(err);
 		} else {
-			console.log(`repository (${repo}) pulled successfully into folder [${dest}]`);
+			console.log(chalk.green(`repository (${repo}) pulled successfully into folder [${dest}]`));
 		}
 	};
 
@@ -61,7 +63,7 @@ if ((repo && repo.length && dest.length) || overwrite || auto) {
 		else {
 
 			if ((!files.length && !!repo) || (overwrite && !!repo)) {
-				console.log(`loading src from repository ${repo} into folder ${sourceFolder}`);
+				console.log(chalk.orange(`loading src from repository ${repo} into folder ${sourceFolder}`));
 				downloadRepo(repo, sourceFolder, overwrite);
 			}
 
@@ -72,7 +74,7 @@ if ((repo && repo.length && dest.length) || overwrite || auto) {
 
 					if (val && ignoreKeys.indexOf(key) == -1) {
 						const dest = `${sourceFolder}/${key}`;
-						console.log(`loading repository ${val} into folder ${dest}`);
+						console.log(chalk.orange(`loading repository ${val} into folder ${dest}`));
 
 						downloadRepo(val, dest, true);
 					}

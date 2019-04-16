@@ -2,9 +2,11 @@ const fs = require('fs-extra'),
 	path = require('path'),
 	replace = require('replace-in-file'),
 	mkdirp = require('mkdirp'),
+	chalk = require('chalk'),
+
+	pull = require('./pull.js'),
 	config = require('./package.json').config,
 	siteIsVIP = config.vip,
-	pull = require('./pull.js'),
 	sourceFolder = path.resolve('src');
 
 if (siteIsVIP) {
@@ -50,9 +52,9 @@ if (siteIsVIP) {
 		};
 
 		replace(replaceOptions).then((changes) => {
-			console.log('Wordpres Config Successfully Updated');
+			console.log(chalk.green('Wordpres Config Successfully Updated'));
 		})
 	} else {
-		console.error('wp folder does not exist', wordpressFolder);
+		console.error(chalk.red('wp folder does not exist'), wordpressFolder);
 	}
 }
