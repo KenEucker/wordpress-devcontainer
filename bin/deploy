@@ -3,13 +3,15 @@ wpFolder="./.wp"
 wpContentFolder="$wpFolder/wp-content"
 distFolder="dist"
 
-sudo chmod -R 777 $wpFolder
-sudo chmod -R 777 $distFolder
+chmod -R 777 $wpFolder
+chmod -R 777 $distFolder
 
 mkdir -p $wpContentFolder/themes/
 mkdir -p $wpContentFolder/plugins/
 
 if [ "$(ls A $distFolder)" ]; then
 	npm run build "$@"
+
+	echo "copying files to the local wordpress install folder $wpContentFolder"
 	rsync -r -u $distFolder/* $wpContentFolder/
 fi

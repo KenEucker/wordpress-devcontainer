@@ -4,7 +4,7 @@ themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"
 nodeModulesFolder="node_modules"
 
-sudo chmod -R 777 $sourceFolder
+chmod -R 777 $sourceFolder
 
 if [ !"$(ls -A $sourceFolder)" ]; then
 	node pull.js "$@"

@@ -2,7 +2,7 @@
 nodeModulesFolder="node_modules"
 sourceFolder='src'
 
-sudo chmod -R 777 $sourceFolder
+chmod -R 777 $sourceFolder
 
 if [ "$(ls -A $sourceFolder)" ]; then
 	node pull.js "$@"

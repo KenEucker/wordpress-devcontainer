@@ -1,10 +1,11 @@
 const download = require('download-git-repo'),
 	commander = require('commander'),
 	pkg = require('./package.json'),
+	path = require('path'),
 	config = pkg.config.repositories || {},
 	fs = require('fs-extra'),
 	mkdirp = require('mkdirp-sync'),
-	sourceFolder = 'src';
+	sourceFolder = path.resolve('src');
 
 commander.version(pkg.version)
 	.option('-o, --overwrite [overwrite]', 'overwrite the source folder contents', false)
@@ -52,7 +53,7 @@ if ((repo && repo.length && dest.length) || overwrite) {
 		mkdirp(sourceFolder);
 	}
 
-	fs.readdir(sourceFolder, function (err, files) {
+fs.readdir(sourceFolder, function (err, files) {
 		if (err) console.error(err)
 		else {
 
