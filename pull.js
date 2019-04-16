@@ -62,17 +62,19 @@ fs.readdir(sourceFolder, function (err, files) {
 				downloadRepo(repo, sourceFolder, overwrite);
 			}
 
-			const ignoreKeys = ['src', 'clone', 'access_token'];
-			Object.keys(config).forEach( function (key) {
-				const val = config[key];
+			if (!files.length || overwrite) {
+				const ignoreKeys = ['src', 'clone', 'access_token'];
+				Object.keys(config).forEach( function (key) {
+					const val = config[key];
 
-				if (val && ignoreKeys.indexOf(key) == -1) {
-					const dest = `${sourceFolder}/${key}`;
-					console.log(`loading repository ${val} into folder ${dest}`);
+					if (val && ignoreKeys.indexOf(key) == -1) {
+						const dest = `${sourceFolder}/${key}`;
+						console.log(`loading repository ${val} into folder ${dest}`);
 
-					downloadRepo(val, dest, true);
-				}
-			});
+						downloadRepo(val, dest, true);
+					}
+				});
+			}
 		}
 	});
 }

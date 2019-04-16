@@ -7,7 +7,7 @@ nodeModulesFolder="node_modules"
 chmod -R 777 $sourceFolder
 
 if [ !"$(ls -A $sourceFolder)" ]; then
-	node pull.js "$@" -o
+	node pull.js "$@"
 fi
 
 if [ "$(ls -A $themeFolder)" ]; then
