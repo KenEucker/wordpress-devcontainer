@@ -17,7 +17,7 @@ if (siteIsVIP) {
 			'vip-config',
 		];
 
-	const wordpressVIPMuPlugins = `Automattic/vip-go-mu-plugins`;
+	const wordpressVIPMuPlugins = `Automattic/vip-go-mu-plugins-built`;
 
 	const createFolderInWordpressContentFolder = (folderPath, done) => {
 		if (!done) {
