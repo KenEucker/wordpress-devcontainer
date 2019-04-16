@@ -18,7 +18,7 @@ const fs = require('fs-extra'),
 
 const keep = !!commander.keep;
 
-let sourceFolders = ['theme/dist', 'themes', 'plugin', 'plugins', 'mu-plugins'],
+let sourceFolders = ['theme/dist', 'themes', 'plugin/dist', 'plugins', 'mu-plugins'],
 	buildFolders = ['themes', 'themes', 'plugins', 'plugins', 'mu-plugins'];
 
 if (siteIsVIP) {
@@ -39,7 +39,7 @@ if (fs.existsSync(buildParent) && !keep) {
 	mkdirpSync(buildParent);
 }
 
-for (let index in sourceFolders) {
+for (const index in sourceFolders) {
 
 	let sourceName = sourceFolders[index],
 		buildName = buildFolders[index],
