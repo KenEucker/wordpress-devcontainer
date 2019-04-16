@@ -4,8 +4,8 @@ sourceFolder='src'
 
 chmod -R 777 $sourceFolder
 
-if [ "$(ls -A $sourceFolder)" ]; then
-	node pull.js "$@"
+if [ !"$(ls -A $sourceFolder)" ]; then
+	node pull.js "$@" -y
 fi
 
 if [ ! -d "$nodeModulesFolder" ]; then

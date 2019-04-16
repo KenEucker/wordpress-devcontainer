@@ -13,11 +13,14 @@ commander.version(pkg.version)
 	.option('-d, --dest [dest]', 'the destination folder', sourceFolder)
 	.option('-a, --auth [auth]', 'the authorization token', config.access_token)
 	.option('-c, --clone [clone]', 'clone the repository', config.clone)
+	.option('-y, --yes [yes]', 'autorun', false)
 	.parse(process.argv);
+
 
 const repo = commander.repo,
 	dest = commander.dest,
 	clone = !!commander.clone,
+	auto = !!commander.yes,
 	overwrite = !!commander.overwrite,
 	authorization = commander.auth ? `Authorization: token ${commander.auth}` : null;
 
@@ -48,23 +51,23 @@ const downloadRepo = function (repo, dest, overwrite) {
 	});
 };
 
-if ((repo && repo.length && dest.length) || overwrite) {
+if ((repo && repo.length && dest.length) || overwrite || auto) {
 	if (!fs.existsSync(sourceFolder)) {
 		mkdirp(sourceFolder);
 	}
 
-fs.readdir(sourceFolder, function (err, files) {
+	fs.readdir(sourceFolder, function (err, files) {
 		if (err) console.error(err)
 		else {
 
-			if ((!files.length && !!repo) || (overwrite && !!repo)){
+			if ((!files.length && !!repo) || (overwrite && !!repo)) {
 				console.log(`loading src from repository ${repo} into folder ${sourceFolder}`);
 				downloadRepo(repo, sourceFolder, overwrite);
 			}
 
 			if (!files.length || overwrite) {
 				const ignoreKeys = ['src', 'clone', 'access_token'];
-				Object.keys(config).forEach( function (key) {
+				Object.keys(config).forEach(function (key) {
 					const val = config[key];
 
 					if (val && ignoreKeys.indexOf(key) == -1) {

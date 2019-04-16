@@ -13,5 +13,5 @@ if [ "$(ls A $distFolder)" ]; then
 	npm run build "$@"
 
 	echo "copying files to the local wordpress install folder $wpContentFolder"
-	rsync -r -u $distFolder/* $wpContentFolder/
+	rsync -r -u -q $distFolder/ $wpContentFolder/
 fi
