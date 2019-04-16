@@ -11,17 +11,19 @@
 		"compile": "./bin/compile",
 		"deploy": "./bin/deploy",
 		"pull": "./bin/pull",
-		"redeploy": "npm run compile && npm run build && npm run deploy",
+		"redeploy": "npm run compile && npm run deploy",
 		"start": "./bin/start",
 		"stop": "./bin/stop",
 		"teardown": "./bin/teardown",
 		"vip": "./bin/vip"
 	},
 	"devDependencies": {
+		"commander": "^2.20.0",
 		"download-git-repo": "^1.1.0",
 		"fs-extra": "^7.0.1",
 		"gulp": "^4.0.0",
 		"mkdirp": "^0.5.1",
+		"mkdirp-sync": "^0.0.3",
 		"mocha": "^6.1.3",
 		"path": "^0.12.7",
 		"replace-in-file": "^3.4.4"
@@ -40,9 +42,5 @@
 			"access_token": null,
 			"clone": false
 		}
-	},
-	"dependencies": {
-		"commander": "^2.20.0",
-		"mkdirp-sync": "^0.0.3"
 	}
 }

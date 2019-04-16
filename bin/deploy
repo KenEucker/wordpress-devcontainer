@@ -1,13 +1,15 @@
 #!/bin/bash
-wpFolder="./.wp/wp-content"
+wpFolder="./.wp"
+wpContentFolder="$wpFolder/wp-content"
 distFolder="dist"
 
 sudo chmod -R 777 $wpFolder
+sudo chmod -R 777 $distFolder
 
-mkdir -p $wpFolder/themes/
-mkdir -p $wpFolder/plugins/
+mkdir -p $wpContentFolder/themes/
+mkdir -p $wpContentFolder/plugins/
 
 if [ "$(ls A $distFolder)" ]; then
 	npm run build "$@"
-	rsync -r -u $distFolder/* $wpFolder
+	rsync -r -u $distFolder/* $wpContentFolder/
 fi

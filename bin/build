@@ -1,8 +1,10 @@
 #!/bin/bash
 nodeModulesFolder="node_modules"
-soureFolder='src'
+sourceFolder='src'
 
-if [ "$(ls -A $soureFolder)" ]; then
+sudo chmod -R 777 $sourceFolder
+
+if [ "$(ls -A $sourceFolder)" ]; then
 	node pull.js "$@"
 fi
 

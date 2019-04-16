@@ -2,5 +2,5 @@
 wpFolder="./.wp"
 distFolder="dist"
 
-sudo rm -rf $distFolder
-sudo rm -rf $wpFolder
+rm -rf $distFolder
+rm -rf $wpFolder

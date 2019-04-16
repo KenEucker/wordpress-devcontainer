@@ -10,7 +10,6 @@ if [ !"$(ls -A $sourceFolder)" ]; then
 	node pull.js "$@"
 fi
 
-
 if [ "$(ls -A $themeFolder)" ]; then
 
 	cd $themeFolder
