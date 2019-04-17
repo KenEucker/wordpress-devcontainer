@@ -74,7 +74,7 @@ if ((repo && repo.length && dest.length) || overwrite || auto) {
 
 					if (val && ignoreKeys.indexOf(key) == -1) {
 						const dest = `${sourceFolder}/${key}`;
-						console.log(chalk.orange(`loading repository ${val} into folder ${dest}`));
+						console.log(chalk.cyan(`loading repository ${val} into folder ${dest}`));
 
 						downloadRepo(val, dest, true);
 					}

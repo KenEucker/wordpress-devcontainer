@@ -3,10 +3,11 @@ sourceFolder='src'
 themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"
 nodeModulesFolder="node_modules"
+themeGulpModule="./node_modules/.bin/gulp"
 
 chmod -R 777 $sourceFolder
 
-if [ !"$(ls -A $sourceFolder)" ]; then
+if [ ! "$(ls -A $sourceFolder)" ]; then
 	node pull.js "$@" -y
 fi
 
@@ -21,7 +22,7 @@ if [ "$(ls -A $themeFolder)" ]; then
 	cd ../..
 
 	if [ ! -d "$themeFolder/gulpfile.js" ]; then
-		./node_modules/.bin/gulp -f $themeFolder/gulpfile.js compile
+		$themeGulpModule -f $themeFolder/gulpfile.js compile
 	fi
 fi
 
@@ -36,6 +37,6 @@ if [ "$(ls -A $pluginFolder)" ]; then
 	cd ../..
 
 	if [ ! -d "$pluginFolder/gulpfile.js" ]; then
-		./node_modules/.bin/gulp -f $pluginFolder/gulpfile.js compile
+		$themeGulpModule -f $pluginFolder/gulpfile.js compile
 	fi
 fi

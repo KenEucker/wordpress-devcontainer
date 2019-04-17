@@ -1,0 +1,34 @@
+#!/bin/bash
+sourceFolder="src"
+themeFolder="$sourceFolder/theme"
+pluginFolder="$sourceFolder/plugin"
+themeGulpModule="./node_modules/.bin/gulp"
+watchTask='watch-bundle'
+
+chmod -R 777 $sourceFolder
+
+if [ ! "$(ls -A $sourceFolder)" ]; then
+	npm run compile "$@"
+fi
+
+if [ "$(ls -A $themeFolder)" ] && [ "$(ls -A $pluginFolder)" ]; then
+	echo "1"
+	if [ ! -d "$themeFolder/gulpfile.js" ] && [ ! -d "$pluginFolder/gulpfile.js" ]; then
+		echo "running both theme and plugin watch tasks"
+		$themeGulpModule -f $themeFolder/gulpfile.js $watchTask & $themeGulpModule -f $themeFolder/gulpfile.js $watchTask
+	fi
+else 
+	if [ "$(ls -A $themeFolder)" ]; then
+		if [ ! -d "$themeFolder/gulpfile.js" ]; then
+			echo "running theme watch task"
+			$themeGulpModule -f $themeFolder/gulpfile.js $watchTask
+		fi
+	fi
+
+	if [ "$(ls -A $pluginFolder)" ]; then
+		if [ ! -d "$pluginFolder/gulpfile.js" ]; then
+			echo "running plugin watch task"
+			$themeGulpModule -f $pluginFolder/gulpfile.js $watchTask
+		fi
+	fi
+fi

@@ -15,7 +15,8 @@
 		"start": "./bin/start",
 		"stop": "./bin/stop",
 		"teardown": "./bin/teardown",
-		"vip": "./bin/vip"
+		"vip": "./bin/vip",
+		"watch": "./bin/watch"
 	},
 	"devDependencies": {
 		"commander": "^2.20.0",

@@ -15,9 +15,9 @@ services:
     image: wordpress:latest
     restart: always
     expose:
-      - "3000"
+      - "4000"
     ports:
-      - 3000:80
+      - 4000:80
     links:
       - mysql
     environment:
@@ -47,7 +47,7 @@ services:
     command: >
         /bin/sh -c '
         sleep 30;
-        wp core install --path="/var/www/html" --url="http://localhost:3000" --title="Local Wordpress" --admin_user=admin --admin_password=admin --admin_email=a@d.min && echo "WP Core Complete"'
+        wp core install --path="/var/www/html" --url="http://localhost:4000" --title="Local Wordpress" --admin_user=admin --admin_password=admin --admin_email=a@d.min && echo "WP Core Complete"'
     volumes:
       - ".wp:/var/www/html:rw"
     networks:

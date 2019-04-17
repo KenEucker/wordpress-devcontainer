@@ -1,5 +1,5 @@
 #!/bin/bash
-wpPort=5000
+wpPort=4000
 
 set -eu pipefail
 

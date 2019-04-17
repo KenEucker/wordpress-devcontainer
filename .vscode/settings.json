@@ -8,7 +8,6 @@
 	},
 	"editor.tabSize": 4,
 	"editor.insertSpaces": false,
-	"editor.formatOnSave": true,
 	"editor.detectIndentation": false,
 	"files.trimFinalNewlines": false,
 	"prettier.printWidth": 60,
