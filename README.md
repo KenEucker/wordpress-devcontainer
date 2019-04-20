@@ -10,6 +10,14 @@ Run `npm install` to install the required node packages.
 ## Run and deploy local wordpress
 `npm run start` - creates the docker environment, if it does not exist, and runs wordpress at http://localhost:4000. Run `npm run deploy` to copy all of the plugin and theme files to the wordpress installation. The theme and plugin will need to be activated from the wordpress admin after the first deploy. After making changes to the source files, run `npm run redeploy` to have wordpress reflect those changes.
 
+When first creating the docker environment you will need to wait at least 30 seconds before the `wp core install` command finishes. If you try to request localhost before this process has finished you may see the wordpress install screen. Once the install is finished you will see that the file ./wp/wp-config.php exists and that localhost is ready for requests.
+
+An admin user will be created by the `wp core install` processs. The credentials for this account are 
+```
+	user: admin
+	pass: admin
+```
+
 # Requirements
 ## These items are assumed to be installed
 * [NodeJs](https://nodejs.org/en/download/)

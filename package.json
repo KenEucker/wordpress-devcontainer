@@ -36,6 +36,10 @@
 		"theme_name": "my-theme",
 		"plugin_name": null,
 		"port": 6000,
+		"admin_user": {
+			"name": "user",
+			"pass": "user"
+		},
 		"repositories": {
 			"src": null,
 			"theme": "KenEucker/understrap-child",
