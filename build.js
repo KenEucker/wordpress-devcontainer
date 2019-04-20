@@ -65,7 +65,10 @@ for (const index in sourceFolders) {
 
 						if (err) console.error(err);
 						else {
-							fs.copy(sourceFolder, buildFolder, function (err) {
+							fs.copy(sourceFolder, buildFolder, { filter: (file) => {
+								if (file.indexOf('node_modules') !== -1) return false;
+								else return true;
+							} }, function (err) {
 
 								if (err) return console.error(err);
 								else {
