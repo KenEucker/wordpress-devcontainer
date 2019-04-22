@@ -5,13 +5,13 @@ const fs = require('fs-extra'),
 	mkdirpSync = require('mkdirp-sync'),
 	commander = require('commander'),
 	pkg = require('./package.json'),
-
+	
 	config = pkg.config,
 	themeName = config.theme_name,
 	pluginName = config.plugin_name || config.theme_name,
 	siteIsVIP = config.vip,
-	buildParent = path.resolve(`${__dirname}/dist`),
-	sourceParent = path.resolve(`${__dirname}/src`);
+	buildParent = path.resolve(`dist`),
+	sourceParent = path.resolve(`src`);
 
 commander.version(pkg.version)
 	.option('-k, --keep [keep]', 'does clean the build folder if it already exists', false)
@@ -41,14 +41,13 @@ if (fs.existsSync(buildParent) && !keep) {
 }
 
 for (const index in sourceFolders) {
-
 	let sourceName = sourceFolders[index],
 		buildName = buildFolders[index],
 		sourceFolder = path.join(sourceParent, sourceName),
 		buildFolder = path.join(buildParent, buildName);
 
-	if (fs.existsSync(sourceFolder)) {
-		fs.readdir(sourceFolder, function (err, files) {
+			if (fs.existsSync(sourceFolder)) {
+			fs.readdir(sourceFolder, function (err, files) {
 
 			if (err) console.error(err)
 			else {
@@ -57,7 +56,7 @@ for (const index in sourceFolders) {
 					// Aptly name the theme or plugin
 					if (sourceName == 'theme' || sourceName == 'theme/dist') {
 						buildFolder = path.join(buildFolder, themeName);
-					} else if (sourceName == 'plugin') {
+					} else if (sourceName == 'plugin' || sourceName == 'plugin/dist') {
 						buildFolder = path.join(buildFolder, pluginName);
 					}
 

@@ -7,11 +7,11 @@ themeGulpModule="./node_modules/.bin/gulp"
 
 chmod -R 777 $sourceFolder
 
-if [ ! "$(ls -A $sourceFolder)" ]; then
+if [ ! "$(ls $sourceFolder) -A" ]; then
 	node pull.js "$@" -y
 fi
 
-if [ "$(ls -A $themeFolder)" ]; then
+if [ "$(ls $themeFolder) -A" ]; then
 
 	cd $themeFolder
 
@@ -22,7 +22,7 @@ if [ "$(ls -A $themeFolder)" ]; then
 	cd ../..
 
 	if [ ! -d "$themeFolder/gulpfile.js" ]; then
-		$themeGulpModule -f $themeFolder/gulpfile.js compile
+		$themeGulpModule -f $themeFolder/gulpfile.babel.js dist
 	fi
 fi
 
@@ -37,6 +37,6 @@ if [ "$(ls -A $pluginFolder)" ]; then
 	cd ../..
 
 	if [ ! -d "$pluginFolder/gulpfile.js" ]; then
-		$themeGulpModule -f $pluginFolder/gulpfile.js compile
+		$themeGulpModule -f $pluginFolder/gulpfile.babel.js dist
 	fi
 fi

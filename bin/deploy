@@ -1,15 +1,14 @@
 #!/bin/bash
 wpFolder="./.wp"
-wpContentFolder="$wpFolder/wp-content"
+wpContentFolder=$wpFolder/wp-content
 distFolder="dist"
 
 chmod -R 777 $wpFolder
 chmod -R 777 $distFolder
-
 mkdir -p $wpContentFolder/themes/
 mkdir -p $wpContentFolder/plugins/
 
-if [ "$(ls A $distFolder)" ]; then
+if [ "$(ls $distFolder) -A" ]; then
 	npm run build "$@"
 
 	echo "copying files to the local wordpress install folder $wpContentFolder"
