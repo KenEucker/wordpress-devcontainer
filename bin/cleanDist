@@ -1,0 +1,4 @@
+#!/bin/bash
+distFolder="dist"
+
+rm -rf $distFolder/*
