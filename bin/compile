@@ -1,5 +1,5 @@
 #!/bin/bash
-sourceFolder='src'
+sourceFolder='/src'
 themeFolder="$sourceFolder/theme"
 pluginFolder="$sourceFolder/plugin"
 nodeModulesFolder="node_modules"
@@ -11,7 +11,7 @@ if [ ! "$(ls $sourceFolder) -A" ]; then
 	node pull.js "$@" -y
 fi
 
-if [ "$(ls $themeFolder) -A" ]; then
+if [ ! -d "$themeFolder" ] && [ ! "$(ls $themeFolder) -A" ]; then
 
 	cd $themeFolder
 
@@ -19,14 +19,13 @@ if [ "$(ls $themeFolder) -A" ]; then
 		npm install
 	fi
 
+	# npm run compile
+
 	cd ../..
 
-	if [ ! -d "$themeFolder/gulpfile.js" ]; then
-		$themeGulpModule -f $themeFolder/gulpfile.babel.js dist
-	fi
 fi
 
-if [ "$(ls -A $pluginFolder)" ]; then
+if [ ! -d "$pluginFolder" ] && [ "$(ls -A $pluginFolder)" ]; then
 
 	cd $pluginFolder
 
@@ -34,9 +33,12 @@ if [ "$(ls -A $pluginFolder)" ]; then
 		npm install
 	fi
 
-	cd ../..
+	# npm run compile
 
-	if [ ! -d "$pluginFolder/gulpfile.js" ]; then
-		$themeGulpModule -f $pluginFolder/gulpfile.babel.js dist
-	fi
+	cd ../..
 fi
+
+cd $sourceFolder
+
+npm run build
+

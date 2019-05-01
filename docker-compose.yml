@@ -47,7 +47,7 @@ services:
     command: >
         /bin/sh -c '
         sleep 30;
-        wp core install --path="/var/www/html" --url="http://localhost:4000" --title="Local Wordpress" --admin_user=admin --admin_password=admin --admin_email=a@d.min && echo "WP Core Complete"'
+        wp core install --path="/var/www/html" --url="http://localhost:4000" --title="Local Wordpress" --admin_user=wp --admin_password=wp --admin_email=a@d.min && echo "WP Core Complete"'
     volumes:
       - ".wp:/var/www/html:rw"
     networks:
